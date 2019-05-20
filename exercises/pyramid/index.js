@@ -14,12 +14,38 @@
 //       ' ### '
 //       '#####'
 
-function pyramid(n) {
+function pyramid(n, row=0, column=0, midPoint=0, level='') {
+	midPoint = midPoint || Math.floor((n*2-1) / 2);
+
+	// done and
+	if (row === n) {
+		return;
+	}
+
+	// when done with one column
+	if (column === n*2-1) {
+		console.log(level);
+		row++;
+		column = 0;
+		level = '';
+	}
+
+	if (midPoint+row >= column && midPoint-row <= column) {
+		level += '#';
+	} else {
+		level += ' ';
+	}
+
+	pyramid(n, row, column+1, midPoint, level);
+}
+
+function pyramid_non_recursive(n) {
+	const colSize = (n*2)-1,
+		midPoint = Math.floor(colSize/2);
+	
 	for (var i=0 ; i<n ; i++) {
 		let row = '';
-		const colSize = (n*2)-1,
-			midPoint = Math.floor(colSize/2),
-			minPoint = midPoint-i,
+		const minPoint = midPoint-i,
 			maxPoint = midPoint+i;
 		
 		for (var j=0 ; j<colSize ; j++) {
