@@ -14,6 +14,19 @@
 //       ' ### '
 //       '#####'
 
-function pyramid(n) {}
+function pyramid(n) {
+	for (var i=0 ; i<n ; i++) {
+		let row = '';
+		const colSize = (n*2)-1,
+			midPoint = Math.floor(colSize/2),
+			minPoint = midPoint-i,
+			maxPoint = midPoint+i;
+		
+		for (var j=0 ; j<colSize ; j++) {
+			row += j>=minPoint && j<=maxPoint ? '#' : ' ';
+		} 
+		console.log(row);
+	}
+}
 
 module.exports = pyramid;
