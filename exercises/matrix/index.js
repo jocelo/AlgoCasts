@@ -59,9 +59,7 @@ function matrix(n) {
 
 	}
 
-	for (let i=0 ; i<n ; i++) {
-		console.log(resultSet[i])
-	}
+	return resultSet;
 }
 
 module.exports = matrix;
