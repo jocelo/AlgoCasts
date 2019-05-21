@@ -15,22 +15,38 @@
 //     [11, 16, 15, 6],
 //     [10,  9,  8, 7]]
 
-function getNextCoord(resultMatrix, row, col, size) {
-	// 0-Validate if next cell is valid
-	// 1-get direciont change?
-	// 2-get next cell
-	// 3-set value of cell
-	// 4-iterate 
-	console.log('----------------------');
-	console.log(col, col+1, row);
-	console.log('size', size)
-	console.log(resultMatrix)
-	console.log(resultMatrix[row][(col+1)], resultMatrix[row][(col+1)] === '0')
-	if (col+1 < size && resultMatrix[row][(col+1)] === '0') {
-		return {col:col+1, row:row}
+function printMatrix(sourceMatrix, size) {
+	for (let i=0 ; i<size ; i++) {
+		console.log(sourceMatrix[i]);
 	}
+}
+
+function getNextCoord(resultMatrix, row, col, size) {
+	let result = {};
+	let found = false;
+
+	if (col+1 < size && resultMatrix[row][col+1] === 0) {
+		found = true;
+		result = {col:col+1, row:row};
 	
-	return false;
+	} else if (row+1 < size && resultMatrix[row+1][col] === 0) {
+		found = true;
+		result = {col:col, row:row+1};
+	
+	} else if (col-1 >= 0 && resultMatrix[row][col-1] === 0) {
+		found = true;
+		result = {col:col-1, row:row};
+
+	} else if (row-1 >= 0 && resultMatrix[row-1][col] === 0) {
+		found = true;
+		result = {col:col, row:row-1};
+	}
+
+	if (result) {
+		return result;
+	} else {
+		return false;	
+	}	
 }
 
 function matrix(n) {
@@ -43,75 +59,25 @@ function matrix(n) {
 		coord = {};
 
 	for (let i=0 ; i<n ; i++) {
-		rowSet.push('0');
+		rowSet.push(0);
 	}
 	for (let i=0 ; i<n ; i++) {
 		resultSet.push(rowSet.slice());
 	}
 
-	while (counter < (n*n)) {
+	while (counter <= (n*n)) {
 		coord = getNextCoord(resultSet, row, col, n);
 		row = coord.row;
 		col = coord.col;
 
-		console.log('the next available coord is:', coord);
 		if (!coord) {
-			// short curcuit
 			counter = n*n;
 		} else {
 			resultSet[row][col] = counter;
 			counter++;
 		}
 	}
-/*
-	let direction = 'E';
-		col=0,
-		row=0,
-		keepGoing = true,
-		counter = 1;
-
-	while (keepGoing) {
-		console.log('['+row+']['+col+'] = ', counter);
-		
-		resultSet[row][col] = counter;
-
-		switch(direction) {
-			case 'N':
-				break;
-			case 'S':
-				if (
-						(row+1) <= n
-				) {
-					row++;
-				} else {
-					direction = 'W';
-				}
-				break;
-			case 'E':
-				if (
-						(col+1) <= n
-				) {
-					col++;
-				} else {
-					direction='S';
-					row++;
-				}
-				break;
-			case 'W':
-				break;
-			default:
-				return false;
-		}
-		
-		counter++;
-		if (counter === 20) {
-			keepGoing = false;
-		}
-	}
-*/
-	for (let i=0 ; i<n ; i++) {
-		console.log(resultSet[i]);
-	}
+	printMatrix(resultSet, n);
 }
 
 function matrix_iterative(n) {
@@ -161,6 +127,6 @@ function matrix_iterative(n) {
 	return resultSet;
 }
 
-matrix(3);
+matrix(5);
 
 module.exports = matrix;
