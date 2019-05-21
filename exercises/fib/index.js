@@ -8,7 +8,14 @@
 // Example:
 //   fib(4) === 3
 
-function fib(n) {
+function fib(n, step=0, lower=0, upper=1) {
+  if (n == step) {
+    return upper;
+  }
+  return fib(n, step+1, upper, lower+upper);
+}
+
+function fib_iterative(n) {
   let first=0, 
     second=1,
     third;
