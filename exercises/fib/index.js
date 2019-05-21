@@ -8,7 +8,15 @@
 // Example:
 //   fib(4) === 3
 
-function fib(n, step=0, lower=0, upper=1) {
+function fib(n) {
+  if (n < 2) {
+    return n;
+  }
+
+  return fib(n-1) + fib(n-2);
+}
+
+function fib_recursive(n, step=0, lower=0, upper=1) {
   if (n == step) {
     return upper;
   }
