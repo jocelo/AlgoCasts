@@ -64,6 +64,4 @@ function matrix(n) {
 	}
 }
 
-matrix(5)
-
 module.exports = matrix;
