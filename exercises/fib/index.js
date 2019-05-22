@@ -17,24 +17,20 @@ function fib(n) {
 }
 
 function fib_recursive(n, step=0, lower=0, upper=1) {
-  if (n == step) {
+  if (n === step+1) {
     return upper;
   }
-  return fib(n, step+1, upper, lower+upper);
+  return fib_2(n, step+1, upper, lower+upper);
 }
 
-function fib_iterative(n) {
-  let first=0, 
-    second=1,
-    third;
+function fib_array(n) {
+  let series = [0, 1];
 
-  for (let i=1 ; i<=n ; i++) {
-    third = first + second;
-    first = second;
-    second = third;
+  for (let i=2 ; i<=n ; i++) {
+    series[i] = series[i-1] + series[i-2];
   }
 
-  return third;
+  return series[n];
 }
 
 module.exports = fib;
