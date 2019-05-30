@@ -116,7 +116,25 @@ class LinkedList {
 		prevNode.next = prevNode.next.next;
 	}
 
-	
+	insertAt(data, idx) {
+		if (!this.head) {
+			this.head = new Node(data);
+			return;
+		}
+
+		if (idx === 0) {
+			this.head = new Node(data, this.head);
+			return;
+		}
+
+		let node = this.getAt(idx-1);
+		if (node) {
+			node.next = new Node(data, node.next);
+			return;
+		}
+
+		this.insertLast(data);
+	}
 }
 
 module.exports = { Node, LinkedList };
