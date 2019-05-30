@@ -130,6 +130,17 @@ class LinkedList {
 		let node = this.getAt(idx-1) || this.getLast();
 		node.next = new Node(data, node.next);
 	}
+
+	forEach(transformFn) {
+		if (!this.head) {
+			return;
+		}
+		let node = this.head;
+		while(node) {
+			transformFn(node);
+			node = node.next;
+		}
+	}
 }
 
 module.exports = { Node, LinkedList };
